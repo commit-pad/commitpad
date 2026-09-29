@@ -1,0 +1,32 @@
+[Unit]
+Description=Commit GitHub-native Pump.fun launchpad
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=commit
+Group=commit
+WorkingDirectory=/opt/commit/current/commit
+EnvironmentFile=/etc/commit.env
+Environment=NODE_ENV=production
+Environment=NODE_OPTIONS=--no-addons
+ExecStart=/usr/bin/node --import tsx server/start.ts
+Restart=on-failure
+RestartSec=5
+TimeoutStopSec=20
+UMask=0077
+StateDirectory=commit
+StateDirectoryMode=0700
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/var/lib/commit
+RestrictSUIDSGID=true
+LockPersonality=true
+RestrictAddressFamilies=AF_UNIX AF_INET AF_INET6
+LimitNOFILE=65536
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,9 @@
+[Unit]
+Description=Commit backup (/var/lib/commit -> /var/backups/commit/daily)
+After=commit.service
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/sbin/commit-backup
+Nice=10
+IOSchedulingClass=idle

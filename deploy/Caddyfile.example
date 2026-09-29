@@ -1,0 +1,8 @@
+# Replace the example hostname with COMMIT_PUBLIC_ORIGIN's hostname.
+commit.example {
+    encode zstd gzip
+    request_body {
+        max_size 8MB
+    }
+    reverse_proxy 127.0.0.1:5190
+}
